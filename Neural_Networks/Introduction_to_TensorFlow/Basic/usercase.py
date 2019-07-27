@@ -137,3 +137,5 @@ with tf.Session() as sess:
     pred_y = sess.run(y,feed_dict={x:test_x})
     mse = tf.reduce_mean(tf.square(pred_y-test_y))
     print("MSE : %.4f",sess.run(mse))
+
+    
