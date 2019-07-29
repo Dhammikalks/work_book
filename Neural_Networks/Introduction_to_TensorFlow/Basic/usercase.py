@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 
 
 def read_dataset():
-    df = pd.read_csv('/home/dhammika/Desktop/SLDCN/Neural_Networks/Introduction_to_TensorFlow/Basic/sonar.csv')
+    df = pd.read_csv('/home/ros/Desktop/work_book/Neural_Networks/Introduction_to_TensorFlow/Basic/sonar.csv')
     X = df[df.columns[0:60]].values
     y = df[df.columns[60]]
 
@@ -38,13 +38,13 @@ print("train_y",train_y.shape)
 print("test_x",test_x.shape)
 print("test_y",test_y.shape)
 
-learning_rate = 0.3
+learning_rate = 0.03
 training_epochs = 1000
 cost_history = np.empty(shape=[1],dtype=float)
 n_dim = X.shape[1]
 print("n_dim", n_dim)
 n_class = 2
-model_path = "//home/dhammika/Desktop/SLDCN/Neural_Networks/Introduction_to_TensorFlow/Basic/model/"
+model_path = "/home/ros/Desktop/work_book/Neural_Networks/Introduction_to_TensorFlow/Basic/model/"
 
 n_hidden_1 = 60
 n_hidden_2 = 60
@@ -103,7 +103,7 @@ train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(cost_func
 
 
 with tf.Session() as sess:
-    file_writer = tf.summary.FileWriter('/home/dhammika/Desktop/SLDCN/Neural_Networks/Introduction_to_TensorFlow/Basic/graph',sess.graph)
+    file_writer = tf.summary.FileWriter('/home/ros/Desktop/work_book/Neural_Networks/Introduction_to_TensorFlow/Basic/graph',sess.graph)
     sess.run(init)
     mse_history = []
     accuracy_history = []
@@ -137,5 +137,3 @@ with tf.Session() as sess:
     pred_y = sess.run(y,feed_dict={x:test_x})
     mse = tf.reduce_mean(tf.square(pred_y-test_y))
     print("MSE : %.4f",sess.run(mse))
-
-    
