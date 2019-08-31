@@ -105,6 +105,9 @@ int main() {
 	//call Kalman filter algorithm
 	filter(x, P);
 
+
+	//std::cout << "x=" << std::endl <<  x << std::endl;
+	//std::cout << "P=" << std::endl <<  P << std::endl;
 	return 0;
 
 }
@@ -131,7 +134,7 @@ void filter(VectorXd &x, MatrixXd &P) {
 		x = F * x + u;
 		MatrixXd Ft = F.transpose();
 		P = F * P * Ft + Q;
-		
+
 		std::cout << "x=" << std::endl <<  x << std::endl;
 		std::cout << "P=" << std::endl <<  P << std::endl;
 
