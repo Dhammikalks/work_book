@@ -23,11 +23,14 @@ delta_name = ['^', '<', 'V', '>']
 cost = 1
 
 def search():
-    closed = [[0 for row in range(len(grid[0]))] for col in range(len(grid[1]))]
+    closed = [[0 for row in range(len(grid[0]))] for col in range(len(grid))]
+    expand = [[-1 for row in range(len(grid[0]))] for col in range(len(grid))]
     closed[init[0]][init[1]] = 1
+    expand[init[0]][init[1]] = 0
     x = init[0]
     y = init[1]
     g = 0
+    e = 0
     open = [[g, x, y]]
     #print(open)
     Found = False #flag to set when goal is found
@@ -38,11 +41,9 @@ def search():
             resign = True
             print('fail')
         else:
-            print(open)
             open.sort()
             open.reverse()
             next = open.pop()
-            print(next)
             x = next[1]
             y = next[2]
             g = next[0]
@@ -50,6 +51,8 @@ def search():
             if x == goal[0] and y == goal[1]:
                 Found = True;
                 print(next)
+                for i in range(len(expand)):
+                    print(expand[i])
 
             else:
                 for  i in range(len(delta)):
@@ -58,8 +61,10 @@ def search():
                     if x2 >= 0 and x2 < len(grid) and y2 >= 0 and y2 < len(grid[0]):
                         if closed[x2][y2] == 0 and grid[x2][y2] == 0:
                             g2 = g + cost
+                            e = e +1
                             open.append([g2,x2,y2])
                             closed[x2][y2] = 1
+                            expand[x2][y2] = e
 
 
 search()
